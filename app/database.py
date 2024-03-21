@@ -1,19 +1,8 @@
-import os
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from dotenv import load_dotenv
+from app.config import settings
 
-load_dotenv()
-
-
-DATABASE_URL = (
-    f"postgresql+asyncpg://"
-    f"{os.getenv('DB_USER')}:"
-    f"{os.getenv('DB_PASS')}@"
-    f"{os.getenv('DB_HOST')}:"
-    f"{os.getenv('DB_PORT')}/"
-    f"{os.getenv('DB_NAME')}"
-)
+DATABASE_URL = settings.DATABASE_URL
 
 engine = create_async_engine(DATABASE_URL)
 
