@@ -6,8 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
 
 if TYPE_CHECKING:
-    from app.hotels.models import Hotels
-    from app.bookings.models import Bookings
+    from hotels.models import Hotels
+    from bookings.models import Bookings
 
 
 class Rooms(Base):
