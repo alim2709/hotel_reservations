@@ -17,15 +17,15 @@ async def get_bookings(user: Users = Depends(get_current_user)) -> list[SBooking
     return await BookingDAO.find_all()
 
 
-@router.post("")
+@router.post("", response_model=schemas.SBooking)
 async def add_booking(
-    room_id: int,
-    date_from: date,
-    date_to: date,
+    booking: schemas.SNewBooking,
     user: Users = Depends(get_current_user),
 ):
 
-    bookings = await BookingDAO.add(user.id, room_id, date_from, date_to)
+    bookings = await BookingDAO.add(
+        user.id, booking.room_id, booking.date_from, booking.date_to
+    )
     if not bookings:
         raise RoomFullyBooked
-    # return bookings
+    return bookings
